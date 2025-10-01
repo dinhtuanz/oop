@@ -12,7 +12,21 @@ public class StringCode {
 	 * @return max run length
 	 */
 	public static int maxRun(String str) {
-		return 0; // YOUR CODE HERE
+		if (str == null || str.isEmpty()) return 0;
+        int max = 1;
+        int current = 1;
+        for (int i = 1; i < str.length(); i++) {
+            if (str.charAt(i) == str.charAt(i - 1)) {
+                current++;
+                if (current > max) {
+                    max = current;
+                }
+            } else {
+                current = 1;
+            }
+        }
+        return max;
+		 // YOUR CODE HERE
 	}
 
 	
@@ -24,7 +38,25 @@ public class StringCode {
 	 * @return blown up string
 	 */
 	public static String blowup(String str) {
-		return null; // YOUR CODE HERE
+		 StringBuilder s = new StringBuilder();
+        for (int i = 0 ; i < str.length() ; i++ ) {
+            char ch = str.charAt(i);
+
+            if ( Character.isDigit( ch )) {
+                int count = ch - '0';
+
+                if (i + 1 < str.length()) {
+                    char next = str.charAt(i + 1);
+                    for (int k = 0 ; k < count ; k++ ) {
+                        s.append(next);
+                    }
+                }
+            } else {
+                s.append(ch);
+            }
+        }
+        return s.toString();
+		 // YOUR CODE HERE
 	}
 	
 	/**
@@ -34,6 +66,19 @@ public class StringCode {
 	 * Compute this in linear time using a HashSet. Len will be 1 or more.
 	 */
 	public static boolean stringIntersect(String a, String b, int len) {
+		 if (len <= 0 || a == null || b == null) return false;
+        if (len > a.length() || len > b.length()) return false;
+
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i <= a.length() - len; i++) {
+            set.add(a.substring(i, i + len));
+        }
+
+        for (int j = 0; j <= b.length() - len; j++) {
+            if (set.contains(b.substring(j, j + len))) {
+                return true;
+            }
+        }
 		return false; // YOUR CODE HERE
 	}
 }
