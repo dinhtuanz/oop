@@ -38,7 +38,7 @@ public class CharGrid {
 				if(num == 0) return 0;
 				if(num == 1) return 1;
 
-				return (b-1+1)*(d-c+1);
+				return (b-a+1)*(d-c+1);
 		
 	}
 	
